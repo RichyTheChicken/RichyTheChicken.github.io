@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falcon Go Live Countdown Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 80px;
+            color: #333;
+            color: #FF0000; /* Red */
+            color: #FFA500; /* Orange */
+            color: #FFFF00; /* Yellow */
+            color: #008000; /* Green */
+            color: #0000FF; /* Blue */
+            color: #4B0082; /* Indigo */
+        }
+        #countdown {
+            font-size: 72px;
+            color: #0000ff;
+            font-weight: bold;
+        }
+        #countdown div {
+            margin: 20px 0;
+        }
+        .days {
+            font-size: 72px;
+            color: #0000ff;
+            font-weight: bold;
+        }
+        .hours {
+            font-size: 60px;
+            color: #ff0000;
+        }
+        .minutes {
+            font-size: 40px;
+            color: #ffa500;
+        }
+        .seconds {
+            font-size: 20px;
+            color: #008000;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <span style="color: #FF0000;">F</span>
+        <span style="color: #FFA500;">a</span>
+        <span style="color: #FFFF00;">l</span>
+        <span style="color: #008000;">c</span>
+        <span style="color: #0000FF;">o</span>
+        <span style="color: #4B0082;">n</span>
+        <span style="color: #FF0000;"> </span>
+        <span style="color: #FFA500;">g</span>
+        <span style="color: #FFFF00;">o</span>
+        <span style="color: #008000;"> </span>
+        <span style="color: #0000FF;">l</span>
+        <span style="color: #4B0082;">i</span>
+        <span style="color: #FF0000;">v</span>
+        <span style="color: #FFA500;">e</span>
+        <span style="color: #FFFF00;"> </span>
+        <span style="color: #008000;">c</span>
+        <span style="color: #0000FF;">o</span>
+        <span style="color: #4B0082;">u</span>
+        <span style="color: #FF0000;">n</span>
+        <span style="color: #FFA500;">t</span>
+        <span style="color: #FFFF00;">d</span>
+        <span style="color: #008000;">o</span>
+        <span style="color: #0000FF;">w</span>
+        <span style="color: #4B0082;">n</span>
+        <span style="color: #FF0000;"> </span>
+        <span style="color: #FFA500;">c</span>
+        <span style="color: #FFFF00;">l</span>
+        <span style="color: #008000;">o</span>
+        <span style="color: #0000FF;">c</span>
+        <span style="color: #4B0082;">k</span>
+    </h1>
+    <div id="countdown">
+        <div class="days"></div>
+        <div class="hours"></div>
+        <div class="minutes"></div>
+        <div class="seconds"></div>
+    </div>
+    <audio id="beep" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+    <script>
+        const goLiveDate = new Date('2025-01-01T09:00:00Z');
+        let previousHour = -1;
+
+        function updateCountdown() {
+            const now = new Date();
+            const remainingTime = goLiveDate - now;
+
+            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            document.querySelector('.days').innerHTML = `${days} days`;
+            document.querySelector('.hours').innerHTML = `${hours} hours`;
+            document.querySelector('.minutes').innerHTML = `${minutes} minutes`;
+            document.querySelector('.seconds').innerHTML = `${seconds} seconds`;
+
+            // Check if the hour has changed and play the beep sound
+            if (hours !== previousHour) {
+                document.getElementById('beep').play();
+                previousHour = hours;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
